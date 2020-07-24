@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'signin_page.dart';
 import 'signup_page.dart';
 
-
 class LogSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber,
       body: SingleChildScrollView(
-              child: Padding(
+        child: Padding(
           padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
@@ -25,7 +24,8 @@ class LogSignUp extends StatelessWidget {
                     Text(
                       "Login UI",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -59,7 +59,8 @@ class LogSignUp extends StatelessWidget {
                     Text(
                       "New user",
                       textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w200),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w200),
                     ),
                   ],
                 ),
@@ -109,7 +110,8 @@ class LogSignUp extends StatelessWidget {
                     ),
                     Text(
                       "Already have an account",
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w200),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w200),
                     )
                   ],
                 ),

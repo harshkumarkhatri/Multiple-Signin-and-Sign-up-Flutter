@@ -12,8 +12,8 @@ class _SignUpState extends State<SignUp> {
   String successMessage = "";
   final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
   String _email, _password;
-  final _passwordController=TextEditingController(text:'');
-  final _confirmPasswordController=TextEditingController(text:'');
+  final _passwordController = TextEditingController(text: '');
+  final _confirmPasswordController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _SignUpState extends State<SignUp> {
       body: Form(
         key: _formstate,
         child: SingleChildScrollView(
-                  child: Column(
+          child: Column(
             children: [
               Container(
                 alignment: Alignment.center,
@@ -71,14 +71,14 @@ class _SignUpState extends State<SignUp> {
                 alignment: Alignment.center,
                 padding:
                     EdgeInsets.only(top: 60, left: 10, right: 10, bottom: 10),
-                child: TextFormField(controller: _confirmPasswordController,
+                child: TextFormField(
+                  controller: _confirmPasswordController,
                   obscureText: true,
                   validator: (input) {
                     if (input.trim() != _passwordController.text.trim()) {
                       return "passwords do not match";
                     }
                   },
-                  // onSaved: (input)=>_password=input,
                   decoration: InputDecoration(
                     icon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
@@ -88,20 +88,22 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               RaisedButton(
-                onPressed: () {signIn(_email,_password).then((user){
-                  if(user!=null){
-                    print("success");
-                    setState(() {
-                      successMessage="Registered successfully. \n You can now login";
-
-                    });
-                  }else{
-                    setState(() {
-                      successMessage="Error registering";
-                    });
-                    print("Error registering");
-                  }
-                });},
+                onPressed: () {
+                  signIn(_email, _password).then((user) {
+                    if (user != null) {
+                      print("success");
+                      setState(() {
+                        successMessage =
+                            "Registered successfully. \n You can now login";
+                      });
+                    } else {
+                      setState(() {
+                        successMessage = "Error registering";
+                      });
+                      print("Error registering");
+                    }
+                  });
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.black)),
@@ -126,38 +128,40 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.all(10.0),
                 ),
               ),
-              (successMessage!=''?
-              Text(
-                successMessage,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,color: Colors.blue,
-                ),
-              )
-              :Container())
+              (successMessage != ''
+                  ? Text(
+                      successMessage,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.blue,
+                      ),
+                    )
+                  : Container())
             ],
           ),
         ),
       ),
     );
   }
-  Future<FirebaseUser> signIn(email, password) async{
-  final formState= _formstate.currentState;
-  if(formState.validate()){
-    formState.save();
-    try{
-      FirebaseUser user=(await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password)).user;
-      assert(user!=null);
-      assert(await user.getIdToken()!=null);
-      print(user);
-      return user;
 
-    }catch(e){
-      print(e);
-      return null;
+  Future<FirebaseUser> signIn(email, password) async {
+    final formState = _formstate.currentState;
+    if (formState.validate()) {
+      formState.save();
+      try {
+        FirebaseUser user = (await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(
+                    email: email, password: password))
+            .user;
+        assert(user != null);
+        assert(await user.getIdToken() != null);
+        print(user);
+        return user;
+      } catch (e) {
+        print(e);
+        return null;
+      }
     }
   }
 }
-}
-
-

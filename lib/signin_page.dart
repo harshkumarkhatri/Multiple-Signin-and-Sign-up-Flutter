@@ -9,11 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // final AuthSer
-
   String _email, _password;
   bool isGoogleSignin = false;
-  // final
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -24,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
         title: Text("Sign in page"),
       ),
       body: SingleChildScrollView(
-              child: Form(
+        child: Form(
           key: _formKey,
           child: Column(
             children: [
@@ -94,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(10.0),
                 ),
               ),
-              SizedBox(height:25),
+              SizedBox(height: 25),
               RaisedButton(
                 onPressed: () {
                   googleSignIn(context);
@@ -136,9 +133,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<FirebaseUser> signIn() async {
     final formState = _formKey.currentState;
-    // print(_email+" "+_password);
     if (formState.validate()) {
-      // Login with firebase
       formState.save();
       try {
         FirebaseUser user = (await FirebaseAuth.instance
@@ -146,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
             .user;
         print("success");
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home(user:null)));
+            context, MaterialPageRoute(builder: (context) => Home(user: null)));
         return user;
       } catch (e) {
         print(e);
